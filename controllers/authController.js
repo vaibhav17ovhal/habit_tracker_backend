@@ -2,6 +2,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
 const Habit = require('../models/Habit');
+const { formatUser } = require('../utils/formatUser');
 
 const signup = async (req, res) => {
   try {
@@ -39,12 +40,7 @@ const signup = async (req, res) => {
       success: true,
       message: 'User registered successfully',
       token,
-      user: {
-        id: user._id,
-        name: user.name,
-        email: user.email,
-        avatar: user.avatar,
-      },
+      user: formatUser(user),
     });
   } catch (error) {
     res.status(500).json({
@@ -92,12 +88,7 @@ const login = async (req, res) => {
       success: true,
       message: 'Login successful',
       token,
-      user: {
-        id: user._id,
-        name: user.name,
-        email: user.email,
-        avatar: user.avatar,
-      },
+      user: formatUser(user),
     });
   } catch (error) {
     res.status(500).json({

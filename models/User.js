@@ -25,6 +25,60 @@ const userSchema = new mongoose.Schema(
       type: String,
       default: '',
     },
+    username: {
+      type: String,
+      unique: true,
+      sparse: true,
+      trim: true,
+      lowercase: true,
+    },
+    dob: {
+      type: Date,
+    },
+    gender: {
+      type: String,
+      default: '',
+    },
+    primaryGoal: {
+      type: String,
+      default: '',
+    },
+    preferences: {
+      routinePreference: {
+        type: String,
+        enum: ['morning', 'evening'],
+        default: 'morning',
+      },
+      notificationsEnabled: {
+        type: Boolean,
+        default: true,
+      },
+      reminderTime: {
+        type: String,
+        default: '08:00',
+      },
+      theme: {
+        type: String,
+        enum: ['light', 'dark'],
+        default: 'light',
+      },
+    },
+    habitTargets: {
+      weeklyTarget: {
+        type: Number,
+        default: 5,
+        min: 1,
+        max: 21,
+      },
+      defaultCategories: {
+        type: [String],
+        default: [],
+      },
+    },
+    profileSetupComplete: {
+      type: Boolean,
+      default: false,
+    },
   },
   { timestamps: true }
 );
